@@ -28,7 +28,7 @@ Un portfolio moderne et interactif développé avec React, TypeScript et Three.j
 ## 🤝 Contact
 
 **Adem Yacef**
-- 📧 Email : [contact@ademyacef.dev](mailto:contact@ademyacef.dev)
+- 📧 Email : [yacefadem03@gmail.com](adem yacef <yacefadem03@gmail.com>)
 - 💼 LinkedIn : [Adem Yacef](https://linkedin.com/in/ademyacef)
 - 🐙 GitHub : [@Adem-yac](https://github.com/Adem-yac)
 
