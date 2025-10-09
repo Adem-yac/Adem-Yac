@@ -1,5 +1,7 @@
-# 💫 About Me:
-Développeur web et mobile passionné par l'innovation et la création de solutions logicielles efficaces centrées sur l'utilisateur
+💫 About Me
+
+💻 Développeur web et mobile passionné par l’innovation, je conçois des solutions performantes, modernes et centrées sur l’utilisateur.
+🎯 Spécialisé en Laravel, React, et Flutter, je développe des applications complètes alliant design, performance et expérience utilisateur.
 
 
 ## 🌐 Socials
