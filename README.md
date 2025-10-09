@@ -3,7 +3,7 @@ Développeur web et mobile passionné par l'innovation et la création de soluti
 
 
 ## 🌐 Socials:
-[![LinkedIn] : (https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/Adem Yac)
+[![LinkedIn]. : (https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/Adem Yac)
 
 [![email] : [yacefadem03@gmail.com]](mailto:yacefadem03@gmail.com) 
 
