@@ -8,7 +8,9 @@ const __dirname = path.dirname(__filename);
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/Adem-Yac/",
+  // Vercel (et la plupart des hébergeurs) servent l'app à la racine "/"
+  // Le base "/Adem-Yac/" était pour GitHub Pages.
+  base: "/",
   server: {
     host: "::",
     port: 8080,
