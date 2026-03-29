@@ -1,56 +1,73 @@
 import { motion } from 'framer-motion';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Github, Smartphone, Globe, Database, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { ExternalLink, Flame, Plus, Store } from 'lucide-react';
 
-const projects = [
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+type Project = {
+  slug: string;
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  technologies: string[];
+  category: string;
+  color: 'primary' | 'secondary' | 'accent';
+  liveUrl: string;
+  detailsPath: string;
+  isPlaceholder?: boolean;
+};
+
+const projects: Project[] = [
   {
-    title: "Application de Réservation d'Hôtel",
-    description: "Solution complète de réservation hôtelière avec application mobile Flutter pour les clients et interface web d'administration React.js. Système en temps réel avec Firebase.",
-    icon: Smartphone,
-    technologies: ["Flutter", "React.js", "Firebase", "API REST"],
-    category: "Full-Stack",
-    color: "primary",
-    link: ""
+    slug: 'r3p-store',
+    title: 'R3P — Boutique E-commerce (Vêtements)',
+    description:
+      'Boutique personnalisée avec admin (suivi commandes, produits), catégories/genres, codes promo et statistiques. Responsive mobile/tablette.',
+    icon: Store,
+    technologies: ['React', 'API PHP', 'PostgreSQL', 'Admin', 'Responsive'],
+    category: 'E-commerce',
+    color: 'primary',
+    liveUrl: 'https://r3p-store.vercel.app',
+    detailsPath: '/projects/r3p-store',
   },
   {
-    title: "Système de Gestion RH",
-    description: "Application web de gestion des ressources humaines avec système de pointage ZKteco intégré. Interface moderne avec Laravel Filament.",
-    icon: Users,
-    technologies: ["Laravel", "Filament", "MySQL", "ZKteco API"],
-    category: "Web App",
-    color: "secondary",
-    link: "https://github.com/amaraadelyazid/zkteco1"
+    slug: 'bougie-beaute',
+    title: 'L’Atelier Bougie — Boutique E-commerce (Bougies artisanales)',
+    description:
+      'Boutique e-commerce avec commande en ligne + admin (produits, commandes, vidéos, promos). Expérience moderne et responsive.',
+    icon: Flame,
+    technologies: ['React', 'API PHP', 'PostgreSQL', 'Admin', 'Vidéos'],
+    category: 'E-commerce',
+    color: 'accent',
+    liveUrl: 'https://bougie-beaute.vercel.app',
+    detailsPath: '/projects/bougie-beaute',
   },
   {
-    title: "Sites E-commerce",
-    description: "Développement de plusieurs sites e-commerce incluant une boutique de fleuriste avec système de commande en ligne et gestion des stocks.",
-    icon: Globe,
-    technologies: ["WordPress", "WooCommerce", "PHP", "MySQL"],
-    category: "E-commerce",
-    color: "accent",
-    link: ""
+    slug: 'next',
+    title: 'Prochain projet (à venir)',
+    description:
+      'Ajout rapide d’un nouveau projet ici: titre, stack, lien live et page détails. Donne-moi le prochain projet et je l’intègre.',
+    icon: Plus,
+    technologies: ['Soon'],
+    category: 'Nouveau',
+    color: 'secondary',
+    liveUrl: '',
+    detailsPath: '',
+    isPlaceholder: true,
   },
-  {
-    title: "Applications de Gestion",
-    description: "Suite d'applications pour la gestion d'employés et de stocks avec interfaces intuitives et reporting avancé.",
-    icon: Database,
-    technologies: ["PHP", "MySQL", "JavaScript", "CSS3"],
-    category: "Business Apps",
-    color: "primary",
-    link: ""
-  }
 ];
 
 interface ProjectCardProps {
-  project: typeof projects[0];
+  project: Project;
   index: number;
 }
 
 function ProjectCard({ project, index }: ProjectCardProps) {
   const IconComponent = project.icon;
-  
+  const navigate = useNavigate();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -60,18 +77,28 @@ function ProjectCard({ project, index }: ProjectCardProps) {
       whileHover={{ scale: 1.02 }}
       className="animate-fade-in-up"
     >
-      <Card className="glassmorphism shadow-card hover:shadow-floating transition-smooth h-full group">
+      <Card
+        className={`glassmorphism shadow-card hover:shadow-floating transition-smooth h-full group ${
+          project.isPlaceholder ? 'border-dashed border-border/60' : ''
+        }`}
+      >
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between mb-4">
-            <div className={`p-3 rounded-lg ${
-              project.color === 'primary' ? 'gradient-primary' : 
-              project.color === 'secondary' ? 'bg-secondary' : 
-              'bg-accent'
-            } ${
-              project.color === 'primary' ? 'glow-primary' : 
-              project.color === 'secondary' ? 'glow-secondary' : 
-              'glow-accent'
-            }`}>
+            <div
+              className={`p-3 rounded-lg ${
+                project.color === 'primary'
+                  ? 'gradient-primary'
+                  : project.color === 'secondary'
+                    ? 'bg-secondary'
+                    : 'bg-accent'
+              } ${
+                project.color === 'primary'
+                  ? 'glow-primary'
+                  : project.color === 'secondary'
+                    ? 'glow-secondary'
+                    : 'glow-accent'
+              }`}
+            >
               <IconComponent className="h-6 w-6 text-white" />
             </div>
             <Badge variant="outline" className="text-xs">
@@ -82,32 +109,42 @@ function ProjectCard({ project, index }: ProjectCardProps) {
             {project.title}
           </CardTitle>
         </CardHeader>
-        
+
         <CardContent className="pt-0">
-          <p className="text-muted-foreground mb-6 leading-relaxed">
-            {project.description}
-          </p>
-          
+          <p className="text-muted-foreground mb-6 leading-relaxed">{project.description}</p>
+
           <div className="flex flex-wrap gap-2 mb-6">
             {project.technologies.map((tech) => (
-              <Badge 
-                key={tech} 
-                variant="secondary" 
+              <Badge
+                key={tech}
+                variant="secondary"
                 className="text-xs bg-muted/30 hover:bg-muted transition-smooth"
               >
                 {tech}
               </Badge>
             ))}
           </div>
-          
-          <div className="flex gap-3">
-            <Button 
-              size="sm" 
-              className="flex-1 gradient-primary hover:scale-105 transition-smooth"
-              onClick={() => project.link && window.open(project.link, '_blank')}
+
+          <div className="flex gap-3 flex-wrap">
+            <Button
+              size="sm"
+              className="flex-1 min-w-[170px] gradient-primary hover:scale-105 transition-smooth"
+              disabled={project.isPlaceholder}
+              onClick={() => project.detailsPath && navigate(project.detailsPath)}
             >
               <ExternalLink className="mr-2 h-4 w-4" />
               Voir Détails
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="flex-1 min-w-[170px] glassmorphism hover:scale-105 transition-smooth"
+              disabled={project.isPlaceholder || !project.liveUrl}
+              onClick={() =>
+                project.liveUrl && window.open(project.liveUrl, '_blank', 'noopener,noreferrer')
+              }
+            >
+              Visiter
             </Button>
           </div>
         </CardContent>
@@ -137,8 +174,7 @@ export default function Projects() {
             Mes <span className="text-gradient">Projets</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Découvrez une sélection de mes réalisations, des applications web aux 
-            solutions mobiles, démontrant ma polyvalence technique et créative.
+            Mes deux boutiques e-commerce (pages détails + captures + lien live).
           </p>
         </motion.div>
 
